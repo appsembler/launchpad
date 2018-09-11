@@ -1,6 +1,6 @@
-# Akamai Developer World Tour 2 Environment
+# Akamai Developer World Tour Environment
 
-Environment setup for Akamai Developer World Tour 2
+Environment setup for Akamai Developer World Tour 
 
 ## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fakamai%2Fcli.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fakamai%2Fcli?ref=badge_large)
+[Apache License 2.0](LICENSE)

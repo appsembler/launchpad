@@ -1,7 +1,7 @@
 FROM alpine
 ENV AKAMAI_CLI_HOME=/cli
 RUN mkdir /cli && \
-    apk add --no-cache git python2 python2-dev py2-pip python3 python3-dev npm wget jq openssl openssl-dev curl nodejs build-base libffi libffi-dev go && \
+    apk add --no-cache git python2 python2-dev py2-pip python3 python3-dev npm wget jq openssl openssl-dev curl nodejs build-base libffi libffi-dev && \
     wget -q `curl -s https://api.github.com/repos/akamai/cli/releases/latest | jq .assets[].browser_download_url | grep linuxamd64 | grep -v sig | sed s/\"//g`; \
     mv akamai-*-linuxamd64 /usr/local/bin/akamai && chmod +x /usr/local/bin/akamai && \
     mkdir -p /cli/.akamai-cli && \
