@@ -38,7 +38,12 @@ RUN mkdir /cli && \
     echo '"implicit_content_type": "json"' >> /root/.httpie/config.json && \
     echo '}' >> /root/.httpie/config.json && \
     ## Create working directory
-    mkdir /root/src 
+    mkdir /root/src && \
+    ## Download lab files
+    cd /root/src && \
+    git clone https://github.com/akamai/world-tour.git && \
+    mv world-tour/bin/* /usr/local/bin/ && \
+    rm -rf world-tour
 
 WORKDIR "/root/src"
 VOLUME /root/.edgerc
