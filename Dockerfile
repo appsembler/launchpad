@@ -37,6 +37,6 @@ RUN mkdir /cli && \
     echo '"implicit_content_type": "json"' >> /root/.httpie/config.json && \
     echo '}' >> /root/.httpie/config.json
 
-VOLUME /root/.edgerc
+VOLUME /root
 WORKDIR "/root"
 ENTRYPOINT ["/bin/bash"]
