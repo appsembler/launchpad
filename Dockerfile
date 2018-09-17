@@ -47,4 +47,4 @@ RUN mkdir /cli && \
 
 WORKDIR "/root/src"
 VOLUME /root/.edgerc
-ENTRYPOINT ["/bin/sh"]
+ENTRYPOINT ["/bin/bash"]
