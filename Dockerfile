@@ -31,20 +31,12 @@ RUN mkdir /cli && \
     echo '{' >> /root/.httpie/config.json && \
     echo '"__meta__": {' >> /root/.httpie/config.json && \
     echo '    "about": "HTTPie configuration file", ' >> /root/.httpie/config.json && \
-    echo '    "help": "https://github.com/jakubroztocil/httpie#config", ' >> /root/.httpie/config.json && \
     echo '    "httpie": "1.0.0-dev"' >> /root/.httpie/config.json && \
     echo '}, ' >> /root/.httpie/config.json && \
     echo '"default_options": ["--timeout=300","--style=autumn", "--auth-type=edgegrid"], ' >> /root/.httpie/#config.json && \
     echo '"implicit_content_type": "json"' >> /root/.httpie/config.json && \
-    echo '}' >> /root/.httpie/config.json && \
-    ## Create working directory
-    mkdir /root/src && \
-    ## Download lab files
-    cd /root/src && \
-    git clone https://github.com/akamai/world-tour.git && \
-    mv world-tour/bin/* /usr/local/bin/ && \
-    rm -rf world-tour
+    echo '}' >> /root/.httpie/config.json
 
-WORKDIR "/root/src"
 VOLUME /root/.edgerc
+WORKDIR "/root"
 ENTRYPOINT ["/bin/bash"]
