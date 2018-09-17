@@ -8,7 +8,6 @@ RUN mkdir /cli && \
     pip install --upgrade pip && \
     curl -s https://developer.akamai.com/cli/package-list.json | jq .packages[].name | sed s/\"//g | xargs akamai install --force && \
     akamai install --force promotional-deployment && \
-    akamai install --force image-manager && \
     ## CLI Settings
     echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
