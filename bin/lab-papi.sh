@@ -6,6 +6,8 @@ if [ ! -f $CONFIG ] ; then
 	UNIQUENAME=${FIRSTNAME}${LASTNAME}-`date +'%Y%m%d'`
 	echo "Your unique name is: ${UNIQUENAME}"
 	echo "UNIQUENAME=${UNIQUENAME}" >> $CONFIG
+	echo -n "email (for receiving activation notifications): " read EMAIL
+	echo "EMAIL=${EMAIL}" >> $CONFIG
 else
 	source $CONFIG
 fi
