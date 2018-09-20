@@ -6,7 +6,7 @@ if [ ! -f $CONFIG ] ; then
 	UNIQUENAME=${FIRSTNAME}${LASTNAME}-`date +'%Y%m%d'`
 	echo "Your unique name is: ${UNIQUENAME}"
 	echo "UNIQUENAME=${UNIQUENAME}" >> $CONFIG
-	echo -n "email (for receiving activation notifications): " read EMAIL
+	echo -n "email (for receiving activation notifications): " ; read EMAIL
 	echo "EMAIL=${EMAIL}" >> $CONFIG
 else
 	source $CONFIG
@@ -14,9 +14,11 @@ fi
 echo -e "\nGenerating the list of commands..."
 echo -e "\nakamai promotional-deployment new-pipeline --pipeline ${UNIQUENAME} --propertyId ${UNIQUENAME}.world-tour dev prod"
 echo -e "\nakamai promotional-deployment set-default --pipeline ${UNIQUENAME}"
-echo -e '\nsed -i "s#cnameFrom\": \".*\",#cnameFrom\": \"dev.${UNIQUENAME}.akamaideveloper.net\",#;s#\"cnameTo\": \".*\",#\"cnameTo\": \"world-tour.akamaideveloper.net.edgesuite.net\",#" ${UNIQUENAME}/environments/dev/hostnames.json'
-echo -e '\nsed -i "s#cnameFrom\": \".*\",#cnameFrom\": \"prod.${UNIQUENAME}.akamaideveloper.net\",#;s#\"cnameTo\": \".*\",#\"cnameTo\": \"world-tour.akamaideveloper.net.edgesuite.net\",#" ${UNIQUENAME}/environments/prod/hostnames.json'
-echo -e "\nakamai promotional-deployment set-default --pipeline ${UNIQUENAME}"
+for MYENV in dev prod ; do
+	# create backup files
+	echo -e "\nmv ${UNIQUENAME}/environments/${MYENV}/hostnames.json ${UNIQUENAME}/environments/${MYENV}/hostnames-original.json"
+	echo -e "\njq \".[].cnameFrom = \\\"${MYENV}.${UNIQUENAME}.world-tour.akamaideveloper.net\\\" | .[].cnameTo = \\\"world-tour.akamaideveloper.net.edgesuite.net\\\" | .[].edgeHostnameId = 3190586\" ${UNIQUENAME}/environments/${MYENV}/hostnames-original.json > ${UNIQUENAME}/environments/${MYENV}/hostnames.json"
+done
 echo -e "\nmv ${UNIQUENAME}/environments/variableDefinitions.json ${UNIQUENAME}/environments/variableDefinitions-original.json"
 echo -e "\njq \".definitions.originHostname.default = \\\"${UNIQUENAME}.origin.akamaideveloper.net\\\" | .definitions.cpCode.default = 749512\" ${UNIQUENAME}/environments/variableDefinitions-original.json > ${UNIQUENAME}/environments/variableDefinitions.json"
 for MYENV in dev prod ; do

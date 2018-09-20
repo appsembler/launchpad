@@ -91,7 +91,7 @@
             "options": {
                 "matchOperator": "MATCHES_ONE_OF",
                 "values": [
-                    "/app"
+                    "/get-the-app"
                 ],
                 "matchCaseSensitive": false
             }
