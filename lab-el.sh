@@ -12,10 +12,10 @@ else
 	source $CONFIG
 fi
 echo -e "\nGenerating the list of commands..."
-for NAME in robots.json Mobile_App.json show_city_depending_on_location.json ; do
+for NAME in robots.json Mobile_App.json show_city_depending_on_location.json Image_Manager.json ; do
 	echo -e "\ncp bin/${NAME} ${UNIQUENAME}/templates/"
 	echo -e "\nmv ${UNIQUENAME}/templates/main.json ${UNIQUENAME}/templates/main-original.json"
-	echo -e "\nsed \"s/\\\"#include:Image_Manager.json\\\"/\\\"#include:${NAME}\\\",\\\n\\\"#include:Image_Manager.json\\\"/\" ${UNIQUENAME}/templates/main-original.json | jq > ${UNIQUENAME}/templates/main.json"
+	echo -e "\njq \".rules.children +=  [\\\"#include:${NAME}\\\"]\" ${UNIQUENAME}/templates/main-original.json | jq > ${UNIQUENAME}/templates/main.json"
 done
 echo -e "\nakamai promotional-deployment promote dev --network staging --emails $EMAIL"
 
