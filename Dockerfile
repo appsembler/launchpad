@@ -28,6 +28,7 @@ RUN mkdir /cli && \
     echo '=           and may dissapear.                 =' >> /root/.motd && \
     echo '================================================' >> /root/.motd && \
     echo "cat /root/.motd" >> /root/.bashrc && \
+    echo "JAVA_HOME='/usr'" >> /root/.bashrc && \
     echo "PS1='Akamai Developer [\w]$ '" >> /root/.bashrc && \
     pip install httpie-edgegrid && \
     mkdir /root/.httpie && \
