@@ -25,7 +25,7 @@ RUN mkdir /cli && \
     echo '=  Welcome to the Akamai Developer World Tour  =' >> /root/.motd && \
     echo '================================================' >> /root/.motd && \
     echo '=  Warning: This environment is ephemeral,     =' >> /root/.motd && \
-    echo '=           and may dissapear.                 =' >> /root/.motd && \
+    echo '=           and may disappear.                 =' >> /root/.motd && \
     echo '================================================' >> /root/.motd && \
     echo "cat /root/.motd" >> /root/.bashrc && \
     echo "JAVA_HOME='/usr'" >> /root/.bashrc && \
@@ -43,4 +43,5 @@ RUN mkdir /cli && \
 
 VOLUME /root
 WORKDIR "/root"
+ADD ./examples /root/examples
 ENTRYPOINT ["/bin/bash"]
