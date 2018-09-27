@@ -1,0 +1,16 @@
+{
+    "testDefinitionExecutions": [
+        {
+            "testDefinitionId": 1908,
+            "targetHostname": "http://<unique_name>.world-tour.akamaideveloper.net/",
+            "targetEnvironment": "production",
+            "ipVersions": [
+                "ipv4"
+            ],
+            "testCaseIds": [
+                2171
+            ],
+            "note": "Testing TTL Changes"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "hostname": "<unique_name>.world-tour.akamaideveloper.net",
+    "ipVersions": [
+        "ipv4"
+    ],
+    "testDefinitionName": "<unique_name>",
+    "testDefinitionDescription": "Testing impact of TTL update related property changes"
+}
