@@ -1,6 +1,6 @@
 CONFIG=$HOME/wt-setup.txt
 if [ ! -f $CONFIG ] ; then 
-	~/examples/wt-setup.sh
+	~/examples/helpers/wt-setup.sh
 	source $CONFIG
 else
 	source $CONFIG

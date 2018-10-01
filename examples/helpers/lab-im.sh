@@ -1,12 +1,12 @@
 CONFIG=$HOME/wt-setup.txt
 if [ ! -f $CONFIG ] ; then 
-	~/examples/wt-setup.sh
+	~/examples/helpers/wt-setup.sh
 	source $CONFIG
 else
 	source $CONFIG
 fi
 echo -n "Enter the name of the property that contains the Image Manager behavior: (for your dev environment it would be something like dev.${UNIQUENAME})" ; read PROPERTY
-POLICYNAME=`~/examples/get-im-policy-name.sh ${PROPERTY}`
+POLICYNAME=`~/examples/helpers/get-im-policy-name.sh ${PROPERTY}`
 if [ $POLICYNAME ~ "null" ] ; then
 	echo -e "\nERROR: $PROPERTY does not seem to use Image Manager"
 	exit 1
