@@ -102,6 +102,17 @@
         }
     ],
     "behaviors": [],
-    "criteria": [],
+    "criteria": [
+          {
+            "name": "path",
+            "options": {
+              "matchOperator": "MATCHES_ONE_OF",
+              "values": [
+                "/geo"
+              ],
+              "matchCaseSensitive": false
+            }
+          }
+        ],    
     "criteriaMustSatisfy": "all"
 }
