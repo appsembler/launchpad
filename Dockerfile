@@ -42,6 +42,7 @@ RUN mkdir /cli && \
     echo '}' >> /root/.httpie/config.json 
 
 VOLUME /root
+VOLUME /pipeline
 WORKDIR "/root"
 ADD ./examples /root/examples
 ENTRYPOINT ["/bin/bash"]
