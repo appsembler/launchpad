@@ -6,6 +6,7 @@ else
 	source $CONFIG
 fi
 echo -e "\nGenerating the list of commands..."
+echo -e "\ncd /pipeline"
 echo -e "\nakamai promotional-deployment new-pipeline --pipeline ${UNIQUENAME} --propertyId ${UNIQUENAME} dev prod"
 echo -e "\nakamai promotional-deployment set-default --pipeline ${UNIQUENAME}"
 
