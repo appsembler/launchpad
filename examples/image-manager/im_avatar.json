@@ -14,8 +14,8 @@
       "transformation": "Resize",
       "type": "normal",
       "aspect": "ignore",
-      "width": 1000,
-      "height": 1000
+      "width": 128,
+      "height": 128
     },
     {
       "transformation": "Grayscale"
