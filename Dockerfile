@@ -10,6 +10,7 @@ RUN mkdir /cli && mkdir /pipeline && \
     curl -s https://developer.akamai.com/cli/package-list.json | jq .packages[].name | sed s/\"//g | xargs akamai install --force && \
     akamai install --force promotional-deployment && \
     akamai install cli-api-gateway && \
+    echo "eval \"$(/usr/local/bin/akamai --bash)\"" >> /root/.bashrc && \
     echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
     echo "config-version        = 1" >> /cli/.akamai-cli/config && \
@@ -18,19 +19,18 @@ RUN mkdir /cli && mkdir /pipeline && \
     echo "client-id             = world-tour" >> /cli/.akamai-cli/config && \
     echo "install-in-path       =" >> /cli/.akamai-cli/config && \
     echo "last-upgrade-check    = ignore" >> /cli/.akamai-cli/config && \
-    echo '         ___    __                         _    ' >  /root/.motd && \
-    echo '        /   |  / /______ _____ ___  ____ _(_)   ' >> /root/.motd && \
-    echo '       / /| | / //_/ __ `/ __ `__ \/ __ `/ /    ' >> /root/.motd && \
-    echo '      / ___ |/ ,< / /_/ / / / / / / /_/ / /     ' >> /root/.motd && \
-    echo '     /_/  |_/_/|_|\__,_/_/ /_/ /_/\__,_/_/      ' >> /root/.motd && \
-    echo '================================================' >> /root/.motd && \
-    echo '=  Welcome to the Akamai Developer World Tour  =' >> /root/.motd && \
-    echo '================================================' >> /root/.motd && \
-    echo '=  Warning: This environment is ephemeral,     =' >> /root/.motd && \
-    echo '=           and may disappear.                 =' >> /root/.motd && \
-    echo '================================================' >> /root/.motd && \
+    echo "         ___    __                         _    " >  /root/.motd && \
+    echo "        /   |  / /______ _____ ___  ____ _(_)   " >> /root/.motd && \
+    echo "       / /| | / //_/ __ `/ __ `__ \/ __ `/ /    " >> /root/.motd && \
+    echo "      / ___ |/ ,< / /_/ / / / / / / /_/ / /     " >> /root/.motd && \
+    echo "     /_/  |_/_/|_|\__,_/_/ /_/ /_/\__,_/_/      " >> /root/.motd && \
+    echo "================================================" >> /root/.motd && \
+    echo "=  Welcome to the Akamai Developer World Tour  =" >> /root/.motd && \
+    echo "================================================" >> /root/.motd && \
+    echo "=  Warning: This environment is ephemeral,     =" >> /root/.motd && \
+    echo "=           and may disappear.                 =" >> /root/.motd && \
+    echo "================================================" >> /root/.motd && \
     echo "cat /root/.motd" >> /root/.bashrc && \
-    echo "JAVA_HOME='/usr'" >> /root/.bashrc && \
     echo "PS1='Akamai Developer [\w]$ '" >> /root/.bashrc && \
     pip install httpie-edgegrid && \
     mkdir /root/.httpie && \
@@ -43,7 +43,7 @@ RUN mkdir /cli && mkdir /pipeline && \
     echo '"implicit_content_type": "json"' >> /root/.httpie/config.json && \
     echo '}' >> /root/.httpie/config.json 
 
-VOLUME /root
+VOLUME /root"
 VOLUME /pipeline
 WORKDIR "/root"
 ADD ./examples /root/examples
