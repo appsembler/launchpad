@@ -38,7 +38,7 @@ RUN echo '{' >> /root/.httpie/config.json && \
     echo '    "about": "HTTPie configuration file", ' >> /root/.httpie/config.json && \
     echo '    "httpie": "1.0.0-dev"' >> /root/.httpie/config.json && \
     echo '}, ' >> /root/.httpie/config.json && \
-    echo '"default_options": ["--timeout=300","--style=autumn", "--auth-type=edgegrid"], ' >> /root/.httpie/config.json && \
+    echo '"default_options": ["--timeout=300","--style=autumn"], ' >> /root/.httpie/config.json && \
     echo '"implicit_content_type": "json"' >> /root/.httpie/config.json && \
     echo '}' >> /root/.httpie/config.json
 
