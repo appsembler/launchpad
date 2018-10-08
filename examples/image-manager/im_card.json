@@ -1,0 +1,27 @@
+{
+  "transformations": [
+    {
+      "width": 500, 
+      "type": "downsize", 
+      "transformation": "Resize", 
+      "aspect": "fit"
+    }
+  ], 
+  "isOlderPolicy": false, 
+  "dateCreated": "2018-10-01 21:47:46+0000", 
+  "version": 1, 
+  "video": false, 
+  "user": "dshafik", 
+  "output": {
+    "perceptualQuality": "mediumHigh"
+  }, 
+  "breakpoints": {
+    "widths": [
+      320, 
+      640, 
+      1024, 
+      2048
+    ]
+  }, 
+  "id": "card"
+}

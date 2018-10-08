@@ -1,0 +1,27 @@
+{
+  "transformations": [
+    {
+      "width": 1600, 
+      "type": "downsize", 
+      "transformation": "Resize", 
+      "aspect": "fit"
+    }
+  ], 
+  "isOlderPolicy": false, 
+  "dateCreated": "2018-10-02 04:35:33+0000", 
+  "version": 1, 
+  "video": false, 
+  "user": "dshafik", 
+  "output": {
+    "perceptualQuality": "mediumHigh"
+  }, 
+  "breakpoints": {
+    "widths": [
+      320, 
+      640, 
+      1024, 
+      2048
+    ]
+  }, 
+  "id": "grid-medium"
+}
