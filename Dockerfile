@@ -7,7 +7,7 @@ RUN mv akamai-*-linuxamd64 /usr/local/bin/akamai && chmod +x /usr/local/bin/akam
 RUN go get github.com/akamai/cli && cd $GOPATH/src/github.com/akamai/cli && dep ensure && go build -o /usr/local/bin/akamai && chmod +x /usr/local/bin/akamai 
 RUN pip install --upgrade pip
 RUN curl -s https://developer.akamai.com/cli/package-list.json | jq .packages[].name | sed s/\"//g | xargs akamai install --force 
-RUN akamai install --force promotional-deployment 
+RUN akamai install --force property-manager
 RUN akamai install cli-api-gateway 
 RUN echo "eval \"$(/usr/local/bin/akamai --bash)\"" >> /root/.bashrc 
 RUN echo "[cli]" > /cli/.akamai-cli/config && \
