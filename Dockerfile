@@ -9,7 +9,7 @@ RUN pip install --upgrade pip
 RUN curl -s https://developer.akamai.com/cli/package-list.json | jq .packages[].name | sed s/\"//g | xargs akamai install --force 
 RUN akamai install --force property-manager
 RUN akamai install cli-api-gateway 
-RUN echo "eval \"$(/usr/local/bin/akamai --bash)\"" >> /root/.bashrc 
+RUN echo 'eval "$(/usr/local/bin/akamai --bash)"' >> /root/.bashrc 
 RUN echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
     echo "config-version        = 1" >> /cli/.akamai-cli/config && \
@@ -38,7 +38,7 @@ RUN echo '{' >> /root/.httpie/config.json && \
     echo '    "about": "HTTPie configuration file", ' >> /root/.httpie/config.json && \
     echo '    "httpie": "1.0.0-dev"' >> /root/.httpie/config.json && \
     echo '}, ' >> /root/.httpie/config.json && \
-    echo '"default_options": ["--timeout=300","--style=autumn", "--auth-type=edgegrid"], ' >> /root/.httpie/config.json && \
+    echo '"default_options": ["--timeout=300","--style=autumn"], ' >> /root/.httpie/config.json && \
     echo '"implicit_content_type": "json"' >> /root/.httpie/config.json && \
     echo '}' >> /root/.httpie/config.json
 
