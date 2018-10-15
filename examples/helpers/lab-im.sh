@@ -5,9 +5,9 @@ if [ ! -f $CONFIG ] ; then
 else
 	source $CONFIG
 fi
-echo -n "Enter the name of the property that contains the Image Manager behavior: (for your dev environment it would be something like dev.${UNIQUENAME})" ; read PROPERTY
+echo -n "Enter the name of the property that contains the Image Manager behavior (for your dev environment it would be something like dev.${UNIQUENAME}): " ; read PROPERTY
 POLICYNAME=`~/examples/helpers/get-im-policy-name.sh ${PROPERTY}`
-if [ $POLICYNAME ~ "null" ] ; then
+if [ `echo "$POLICYNAME" | awk '{print $1}'` = "ERROR:" ] ; then
 	echo -e "\nERROR: $PROPERTY does not seem to use Image Manager"
 	exit 1
 else
