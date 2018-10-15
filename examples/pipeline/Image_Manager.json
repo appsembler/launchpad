@@ -17,7 +17,7 @@
                 "apiReferenceTitle": "",
                 "applyBestFileType": true,
                 "enabled": true,
-                "policyTokenDefault": "<unique_name>-world-tour",
+                "policyTokenDefault": "<unique_name>",
                 "resize": false,
                 "settingsTitle": "",
                 "superCacheRegion": "US",
