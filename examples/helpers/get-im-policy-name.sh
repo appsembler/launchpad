@@ -8,4 +8,4 @@ if [ -z ${POLICYNAME} ] ; then
 fi
 #echo ASSETID=${ASSETID}
 
-echo POLICYNAME="${POLICYNAME}-${ASSETID}"
+echo "${POLICYNAME}-${ASSETID}"

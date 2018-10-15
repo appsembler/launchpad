@@ -18,5 +18,5 @@ echo -e "\nakamai image-manager --policy-set ${POLICYNAME} list-policies --netwo
 echo -e "\nakamai image-manager --policy-set ${POLICYNAME} get-policy .auto --network staging"
 echo -e "\nakamai image-manager --policy-set ${POLICYNAME} set-policy .auto --input-file ~/examples/im_default.json --network staging"
 echo -e "\nakamai image-manager --policy-set ${POLICYNAME} set-policy watermark --input-file ~/examples/im_watermark.json --network staging"
-echo -e "\nakamai image-manager --policy-set ${POLICYNAME} set-policy face-crop1000x1000-bw --input-file ~/examples/im_detect-Bface_resize1000x1000_BW.json --network staging"
+echo -e "\nakamai image-manager --policy-set ${POLICYNAME} set-policy avatar --input-file ~/examples/im_avatar.json --network staging"
 
