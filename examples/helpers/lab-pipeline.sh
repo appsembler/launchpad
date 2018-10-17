@@ -175,7 +175,7 @@ else
 	fi
 	if [ $ERROR = 1 ] ; then
 		echo -e $ERRORMSG
-		echo -e "You can use the following command to update to the right values:"
+		echo -e "You can edit the file manually, or use the following command to update to the right values:"
 		echo -e "\njq \" .definitions.originAPIHostname.type = \\\"hostname\\\" | .definitions.originImagesHostname.type = \\\"hostname\\\" |.definitions.originImagesHostname.default = \\\"s3.amazonaws.com\\\"| .definitions.cpCode.default = 749512 | .definitions.originAPIHostname.default = null\" ${MYFILE}-original > ${MYFILE}"
 		exit 1
 	fi
@@ -220,7 +220,7 @@ for MYENV in dev prod ; do
 		fi
 		if [ $ERROR = 1 ] ; then
 			echo -e $ERRORMSG
-			echo -e "You can use the following command to update to the right values:"
+			echo -e "You can edit the file manually, or use the following command to update to the right values:"
 			echo -e "\njq \".originHostname = \\\"origin-web.urbancrawlapp.com\\\" | .originImagesHostname = null | .originAPIHostname = \\\"origin-api.urbancrawlapp.com\\\" \" ${MYFILE}-original > ${MYFILE}"
 			exit 1
 		fi
@@ -251,7 +251,7 @@ else
 	fi
 	if [ $ERROR = 1 ] ; then
 		echo -e $ERRORMSG
-		echo -e "You can use the following command to update to the right values:"
+		echo -e "You can edit the file manually, or use the following command to update to the right values:"
 		echo -e "\njq \".behaviors[0].options.hostname = \\\"\\\${env.originAPIHostname}\\\" \" ${MYFILE}-original > ${MYFILE}"
 		exit 1
 	fi
@@ -281,7 +281,7 @@ else
 	fi
 	if [ $ERROR = 1 ] ; then
 		echo -e $ERRORMSG
-		echo -e "You can use the following command to update to the right values:"
+		echo -e "You can edit the file manually, or use the following command to update to the right values:"
 		echo -e "\njq \".behaviors[0].options.hostname = \\\"\\\${env.originImagesHostname}\\\" \" ${MYFILE}-original > ${MYFILE}"
 		exit 1
 	fi
@@ -311,7 +311,7 @@ else
 	fi
 	if [ $ERROR = 1 ] ; then
 		echo -e $ERRORMSG
-		echo -e "You can use the following command to update to the right values:"
+		echo -e "You can edit the file manually, or use the following command to update to the right values:"
 		echo -e "\njq \".behaviors[1].options.policyTokenDefault = \\\"${UNIQUENAME}\\\" \" ${MYFILE}-original > ${MYFILE}"
 		exit 1
 	fi
@@ -349,5 +349,3 @@ fi
 # echo -e "\nakamai pipeline list-status"
 echo -e "\nEverything looks good, to promote your changes you can run:\nakamai pipeline promote dev --network staging --emails $EMAIL"
 #echo -e "\nakamai pd check-promotion-status dev"
-
-
