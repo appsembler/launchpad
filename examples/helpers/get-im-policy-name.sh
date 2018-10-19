@@ -1,4 +1,4 @@
-POLICYNAME=`akamai property retrieve $1 2> /dev/null|grep policyTokenDefault|sed 's/.*://;s/,//;s/"//g'`
+POLICYNAME=`akamai property retrieve $1 2> /dev/null|grep policyTokenDefault|sed 's/.*: //;s/,//;s/"//g'`
 ASSETID=`akamai property search $1 2> /dev/null | jq '.versions.items[0].assetId'|sed 's/.*_//;s/"//'`
 
 #echo POLICYNAME=${POLICYNAME}
