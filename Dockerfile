@@ -1,14 +1,18 @@
-FROM alpine
+FROM gcr.io/akamai-virtual-labs/stable/ttyd-orion
 ENV AKAMAI_CLI_HOME=/cli GOROOT=/usr/lib/go GOPATH=/go
+ENV PATH=/go/bin:$PATH
+RUN mkdir -p /go/bin
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/community" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories
 RUN mkdir -p /cli/.akamai-cli && mkdir /pipeline
-RUN apk add --no-cache git bash python2 python2-dev py2-pip python3 python3-dev npm wget jq openssl openssl-dev curl nodejs build-base libffi libffi-dev vim nano util-linux go dep tree bind-tools 
+RUN apk add --no-cache git bash python2 python2-dev py2-pip python3 python3-dev wget jq openssl openssl-dev curl nodejs nodejs-npm build-base libffi libffi-dev vim nano util-linux go tree bind-tools 
 RUN wget -q `curl -s https://api.github.com/repos/akamai/cli/releases/latest | jq .assets[].browser_download_url | grep linuxamd64 | grep -v sig | sed s/\"//g`
 RUN mv akamai-*-linuxamd64 /usr/local/bin/akamai && chmod +x /usr/local/bin/akamai 
+RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 RUN go get github.com/akamai/cli && cd $GOPATH/src/github.com/akamai/cli && dep ensure && go build -o /usr/local/bin/akamai && chmod +x /usr/local/bin/akamai 
 RUN pip install --upgrade pip
-RUN curl -s https://developer.akamai.com/cli/package-list.json | jq .packages[].name | sed s/\"//g | xargs akamai install --force 
+RUN akamai install property
 RUN akamai install --force property-manager
-RUN akamai install cli-api-gateway 
 RUN echo 'eval "$(/usr/local/bin/akamai --bash)"' >> /root/.bashrc 
 RUN echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
@@ -46,4 +50,3 @@ VOLUME /root
 VOLUME /pipeline
 WORKDIR /root
 ADD ./examples /root/examples
-ENTRYPOINT ["/bin/bash"]
