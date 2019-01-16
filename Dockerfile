@@ -1,4 +1,4 @@
-FROM gcr.io/akamai-virtual-labs/ttyd-orion-base:201801160756
+FROM gcr.io/akamai-virtual-labs/ttyd-orion-base:201801161403
 ENV AKAMAI_CLI_HOME=/cli GOROOT=/usr/lib/go GOPATH=/go
 ENV PATH=/go/bin:$PATH
 RUN mkdir -p /go/bin
