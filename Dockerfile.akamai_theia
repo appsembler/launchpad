@@ -20,6 +20,8 @@ RUN go get github.com/akamai/cli && \
 RUN pip install --upgrade pip
 RUN akamai install property
 RUN akamai install --force property-manager
+RUN akamai install --force api-gateway
+RUN akamai install sandbox && cd $AKAMAI_CLI_HOME/.akamai-cli/src/cli-sandbox/ && npm run build
 RUN echo 'eval "$(/usr/local/bin/akamai --bash)"' >> /root/.bashrc
 RUN echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
