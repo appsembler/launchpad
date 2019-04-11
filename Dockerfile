@@ -9,7 +9,7 @@ RUN mkdir -p /go/bin
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/community" >> /etc/apk/repositories
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories
 RUN mkdir -p /cli/.akamai-cli && mkdir /pipeline
-RUN apk update && apk add --no-cache git bash python2 python2-dev py2-pip python3 python3-dev wget jq openssl openssl-dev curl build-base libffi libffi-dev vim nano util-linux go tree bind-tools 
+RUN apk update && apk add --no-cache git bash python2 python2-dev py2-pip python3 python3-dev wget jq openssl openssl-dev openjdk8 curl build-base libffi libffi-dev vim nano util-linux go tree bind-tools 
 RUN wget -q `curl -s https://api.github.com/repos/akamai/cli/releases/latest | jq .assets[].browser_download_url | grep linuxamd64 | grep -v sig | sed s/\"//g`
 RUN mv akamai-*-linuxamd64 /usr/local/bin/akamai && chmod +x /usr/local/bin/akamai
 RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -46,6 +46,7 @@ RUN echo "cat /root/.motd" >> /root/.bashrc
 RUN echo "PS1='Akamai Developer [\w]$ '" >> /root/.bashrc
 RUN pip install httpie-edgegrid
 RUN mkdir /root/.httpie
+RUN echo "export JAVA_HOME=/usr/lib/jvm/default-jvm" >> /root/.bashrc
 RUN echo '{' >> /root/.httpie/config.json && \
     echo '"__meta__": {' >> /root/.httpie/config.json && \
     echo '    "about": "HTTPie configuration file", ' >> /root/.httpie/config.json && \
