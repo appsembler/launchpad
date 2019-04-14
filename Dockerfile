@@ -5,6 +5,7 @@ FROM theiaide/theia:latest
 ENV AKAMAI_CLI_HOME=/cli GOROOT=/usr/lib/go GOPATH=/go
 ENV PATH=/go/bin:$PATH
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm
+ENV HOME=/home/theia
 USER root
 RUN mkdir -p /go/bin
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/community" >> /etc/apk/repositories
@@ -60,8 +61,8 @@ RUN echo '{' >> /home/theia/.httpie/config.json && \
 VOLUME /root
 VOLUME /pipeline
 WORKDIR /home/theia
-ADD ./examples /home/theia/examples
+ADD ./examples /home/theia
 
 EXPOSE 3000
 
-ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/theia/examples", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/theia", "--hostname=0.0.0.0" ]
