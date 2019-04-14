@@ -66,3 +66,4 @@ ADD ./examples /home/theia
 EXPOSE 3000
 
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/theia", "--hostname=0.0.0.0" ]
+ 
