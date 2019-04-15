@@ -1,5 +1,4 @@
 # Dockerfile.theia 
-
 # Alpine 3.8 has node 8 by default, v10 doesn't work with Theia
 FROM theiaide/theia:latest
 ENV AKAMAI_CLI_HOME=/cli GOROOT=/usr/lib/go GOPATH=/go
