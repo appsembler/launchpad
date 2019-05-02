@@ -1,0 +1,20 @@
+{
+    "editor.enablePreview": true,
+    "java.autobuild.enabled": false,
+    "navigator.autoReveal": true,
+    "editor.lineNumbers": "on",
+    "list.openMode": "singleClick",
+    "preview.openByDefault": true,
+    "isc.url.terminal": "http://localhost:52773/terminal/?clean=1",
+    "isc.url.portal": "http://localhost:52773/csp/sys/UtilHome.csp?IRISUsername=tech&IRISPassword=demo&$NAMESPACE=USER",
+    "isc.url.whatisiris": "https://www.intersystems.com/products/intersystems-iris",
+    "isc.url.quickstarts": "https://learning.intersystems.com/course/view.php?name=QS",
+    "isc.url.firstlooks": "https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=AFINDEX",
+    "isc.url.connecting": "https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=AB_idesetup",
+    "isc.url.containers": "https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=ADOCK",
+    "isc.url.learning": "https://learning.intersystems.com",
+    "isc.url.support": "https://www.intersystems.com/support-learning/support/",
+    "isc.url.documentation": "https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?NAMESPACE=USER",
+    "isc.url.gettingstarted": "file://home/project/README.md",
+    "isc.url.labs": "https://learning.intersystems.com/course/view.php?name=Java Build"
+}
