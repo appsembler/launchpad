@@ -1,0 +1,22 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/editor-preview": "next",
+        "@theia/getting-started": "next",
+        "@theia/json": "next",
+        "@theia/plugin-ext-vscode": "next",
+        "@theia/preview": "next",
+        "@theia/textmate-grammars": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next",
+        "@theia/debug": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "vscode-go": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/Go/0.9.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+    }
+}
