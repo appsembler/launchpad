@@ -10,10 +10,10 @@ RUN mkdir -p /go/bin
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/community" >> /etc/apk/repositories
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories
 RUN mkdir -p /cli/.akamai-cli && mkdir /pipeline
-RUN apk update && apk add --no-cache git bash python2 python2-dev py2-pip python3 python3-dev wget jq openssl openssl-dev openjdk8 curl build-base libffi libffi-dev vim nano util-linux go tree bind-tools libc6-compat
+RUN apk update && apk add --no-cache git bash python2 python2-dev py2-pip python3 python3-dev wget jq openssl openssl-dev openjdk8 curl build-base libffi libffi-dev vim nano util-linux go tree bind-tools libc6-compat nss
+RUN ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2
 RUN wget -q `curl -s https://api.github.com/repos/akamai/cli/releases/latest | jq .assets[].browser_download_url | grep linuxamd64 | grep -v sig | sed s/\"//g`
 RUN mv akamai-*-linuxamd64 /usr/local/bin/akamai && chmod +x /usr/local/bin/akamai
-RUN apk add --no-cache nss
 RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 RUN go get github.com/akamai/cli && \
     cd $GOPATH/src/github.com/akamai/cli && \
@@ -27,12 +27,13 @@ RUN akamai install sandbox && cd $AKAMAI_CLI_HOME/.akamai-cli/src/cli-sandbox/ &
 RUN echo 'eval "$(/usr/local/bin/akamai --bash)"' >> /home/theia/.bashrc
 RUN echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
-    echo "config-version        = 1" >> /cli/.akamai-cli/config && \
+    echo "config-version        = 1.1" >> /cli/.akamai-cli/config && \
     echo "enable-cli-statistics = true" >> /cli/.akamai-cli/config && \
     echo "last-ping             = 2018-08-08T00:00:12Z" >> /cli/.akamai-cli/config && \
     echo "client-id             = world-tour" >> /cli/.akamai-cli/config && \
     echo "install-in-path       =" >> /cli/.akamai-cli/config && \
-    echo "last-upgrade-check    = ignore" >> /cli/.akamai-cli/config
+    echo "last-upgrade-check    = ignore" >> /cli/.akamai-cli/config \
+    echo "stats-version         = 1.1" >> /cli/.akamai-cli/config
 RUN echo '         ___    __                         _    ' >  /home/theia/.motd && \
     echo '        /   |  / /______ _____ ___  ____ _(_)   ' >> /home/theia/.motd && \
     echo '       / /| | / //_/ __ `/ __ `__ \/ __ `/ /    ' >> /home/theia/.motd && \
@@ -62,7 +63,7 @@ VOLUME /pipeline
 WORKDIR /home/theia
 ADD ./examples /home/theia
 
-EXPOSE 3000
+EXPOSE 3000 9550
 
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/theia", "--hostname=0.0.0.0" ]
  
