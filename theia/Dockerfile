@@ -9,8 +9,6 @@ ENV DEBIAN_FRONTEND noninteractive
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
 
-# Add git token to reduce API throttling
-ARG GITHUB_TOKEN=212afc960b6126e8c2a295e6b11d9b2c089f5519
 
 #Theia
 ##Needed for node-gyp, nsfw build
@@ -44,9 +42,6 @@ ENV DEBIAN_FRONTEND noninteractive
 #Common deps
 # TODO: 90MB of junk - to install wget (used for .NET Core) and git and sudo 
 RUN apt-get update && apt-get -y install wget git sudo dnsutils
-
-#Developer tools
-ARG GITHUB_TOKEN=212afc960b6126e8c2a295e6b11d9b2c089f5519
 
 #LSPs
 
@@ -98,20 +93,6 @@ COPY --chown=theia:theia InterSystemsLabsDiagram.png /home/project/InterSystemsL
 COPY --chown=theia:theia gitClone.gif /home/project/gitClone.gif
 COPY --chown=theia:theia startup.sh /home/theia/.theia/startup.sh
 
-RUN chmod g+rw /home && \
-    chmod +x /home/theia/.theia/startup.sh && \
-    mkdir -p /home/project && \
-	cd /home/project && \
-	git clone https://$GITHUB_TOKEN@github.com/intersystems/Samples-python-helloworld && rm -r /home/project/Samples-python-helloworld/.git && \
-	git clone https://$GITHUB_TOKEN@github.com/intersystems/Samples-nodejs-helloworld && rm -r /home/project/Samples-nodejs-helloworld/.git && \
-	git clone --single-branch --branch dotnetcore https://$GITHUB_TOKEN@github.com/intersystems/quickstarts-multimodel-dotnet && rm -r /home/project/quickstarts-multimodel-dotnet/.git && \
-	git clone https://$GITHUB_TOKEN@github.com/intersystems/quickstarts-multimodel-java && rm -r /home/project/quickstarts-multimodel-java/.git && \
-	git clone --single-branch --branch dotnet_core https://$GITHUB_TOKEN@github.com/intersystems/Samples-dotnet-helloworld && rm -r /home/project/Samples-dotnet-helloworld/.git && \
-	git clone https://$GITHUB_TOKEN@github.com/intersystems/Samples-java-helloworld && rm -r /home/project/Samples-java-helloworld/.git && \
-	mkdir Samples-java-helloworld/simple && \
-	cp Samples-java-helloworld/lib/intersystems-jdbc-3.0.0.jar Samples-java-helloworld/simple/intersystems-jdbc-3.0.0.jar && \
-	cp Samples-java-helloworld/src/main/java/com/intersystems/samples/HelloWorld.java Samples-java-helloworld/simple/HelloWorld.java && \
-    chown -R theia:theia /home/project && chmod -R a+w /home/project
 #USER theia
 EXPOSE 3000
 ENV SHELL /bin/bash
