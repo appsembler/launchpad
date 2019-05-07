@@ -39,11 +39,8 @@ RUN echo '         ___    __                         _    ' >  /home/theia/.motd
     echo '      / ___ |/ ,< / /_/ / / / / / / /_/ / /     ' >> /home/theia/.motd && \
     echo '     /_/  |_/_/|_|\__,_/_/ /_/ /_/\__,_/_/      ' >> /home/theia/.motd && \
     echo '================================================' >> /home/theia/.motd && \
-    echo '=  Welcome to the Akamai Developer World Tour  =' >> /home/theia/.motd && \
+    echo '=    Welcome to Launchpad Labs from Akamai     =' >> /home/theia/.motd && \
     echo '================================================' >> /home/theia/.motd && \
-    echo '=  Warning: This environment is ephemeral,     =' >> /home/theia/.motd && \
-    echo '=           and may disappear.                 =' >> /home/theia/.motd && \
-    echo '================================================' >> /home/theia/.motd
 RUN echo "cat /home/theia/.motd" >> /home/theia/.bashrc
 RUN echo "PS1='Akamai Developer [\w]$ '" >> /home/theia/.bashrc
 RUN pip install httpie-edgegrid
