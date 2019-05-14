@@ -75,10 +75,12 @@ var terminal_service_1 = require("@theia/terminal/lib/browser/base/terminal-serv
 var browser_1 = require("@theia/core/lib/browser");
 var browser_2 = require("@theia/workspace/lib/browser");
 var preview_contribution_1 = require("@theia/preview/lib/browser/preview-contribution");
-var mini_browser_open_handler_1 = require("@theia/mini-browser/lib/browser/mini-browser-open-handler");
+// import { MiniBrowserCommands } from '@theia/mini-browser/lib/browser/mini-browser-open-handler';
 var akamai_extension_preferences_1 = require("./akamai-extension-preferences");
+var common_frontend_contribution_1 = require("@theia/core/lib/browser/common-frontend-contribution");
+// import { EditorMainMenu } from '@theia/editor/lib/browser/editor-menu';
 var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () {
-    function AkamaiExtensionFrontendApplicationContribution(logger, navigator, terminal, openerService, workspaceService, preview, commands) {
+    function AkamaiExtensionFrontendApplicationContribution(logger, navigator, terminal, openerService, workspaceService, preview, commands, menus) {
         this.logger = logger;
         this.navigator = navigator;
         this.terminal = terminal;
@@ -86,6 +88,7 @@ var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () 
         this.workspaceService = workspaceService;
         this.preview = preview;
         this.commands = commands;
+        this.menus = menus;
     }
     AkamaiExtensionFrontendApplicationContribution.prototype.onStart = function (app) {
         return __awaiter(this, void 0, void 0, function () {
@@ -97,6 +100,17 @@ var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () 
                         terminalWidget = _a.sent();
                         terminalWidget.start();
                         this.terminal.activateTerminal(terminalWidget);
+                        this.menus.unregisterMenuAction("git-history:open-branch-history", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
+                        this.menus.unregisterMenuAction("problemsView:toggle", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
+                        this.menus.unregisterMenuAction("callhierachy:toggle", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
+                        this.menus.unregisterMenuAction("outlineView:toggle", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
+                        this.menus.unregisterMenuAction("gitView:toggle", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
+                        this.menus.unregisterMenuAction("preferences:open");
+                        this.menus.unregisterMenuAction("workspace:openWorkspace", common_frontend_contribution_1.CommonMenus.FILE_OPEN);
+                        this.menus.unregisterMenuAction("workspace:openRecent", common_frontend_contribution_1.CommonMenus.FILE_OPEN);
+                        this.menus.unregisterMenuAction("workspace:close", common_frontend_contribution_1.CommonMenus.FILE_CLOSE);
+                        this.menus.unregisterMenuAction("workspace:saveAs", common_frontend_contribution_1.CommonMenus.FILE_OPEN);
+                        console.log(this.menus);
                         return [2 /*return*/];
                 }
             });
@@ -104,11 +118,14 @@ var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () 
     };
     AkamaiExtensionFrontendApplicationContribution.prototype.initializeLayout = function (app) {
         var _this = this;
+        this.menus.unregisterMenuAction("5_go", common_1.MAIN_MENU_BAR);
+        this.menus.unregisterMenuAction("9_help", common_1.MAIN_MENU_BAR);
         // We open a new file view in the navigator
         this.navigator.openView({
             activate: true
         });
-        this.commands.executeCommand(mini_browser_open_handler_1.MiniBrowserCommands.OPEN_URL.id, "https://www.bostonglobe.com/");
+        // opens a website in preview
+        // this.commands.executeCommand(MiniBrowserCommands.OPEN_URL.id, "https://www.bostonglobe.com/")
         // We get the path of the currently open folder in the workspace (passed when starting the IDE)
         // and open the README.md file in that folder
         var workspace = this.workspaceService.workspace;
@@ -127,9 +144,11 @@ var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () 
         __param(4, inversify_1.inject(browser_2.WorkspaceService)),
         __param(5, inversify_1.inject(preview_contribution_1.PreviewContribution)),
         __param(6, inversify_1.inject(common_1.CommandRegistry)),
+        __param(7, inversify_1.inject(common_1.MenuModelRegistry)),
         __metadata("design:paramtypes", [Object, navigator_contribution_1.FileNavigatorContribution, Object, Object, browser_2.WorkspaceService,
             preview_contribution_1.PreviewContribution,
-            common_1.CommandRegistry])
+            common_1.CommandRegistry,
+            common_1.MenuModelRegistry])
     ], AkamaiExtensionFrontendApplicationContribution);
     return AkamaiExtensionFrontendApplicationContribution;
 }());

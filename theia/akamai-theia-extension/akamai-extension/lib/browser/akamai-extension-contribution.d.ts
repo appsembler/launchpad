@@ -14,7 +14,8 @@ export declare class AkamaiExtensionFrontendApplicationContribution implements F
     protected readonly workspaceService: WorkspaceService;
     protected readonly preview: PreviewContribution;
     protected readonly commands: CommandRegistry;
-    constructor(logger: ILogger, navigator: FileNavigatorContribution, terminal: TerminalService, openerService: OpenerService, workspaceService: WorkspaceService, preview: PreviewContribution, commands: CommandRegistry);
+    protected readonly menus: MenuModelRegistry;
+    constructor(logger: ILogger, navigator: FileNavigatorContribution, terminal: TerminalService, openerService: OpenerService, workspaceService: WorkspaceService, preview: PreviewContribution, commands: CommandRegistry, menus: MenuModelRegistry);
     onStart(app: FrontendApplication): Promise<void>;
     initializeLayout(app: FrontendApplication): MaybePromise<void>;
 }
