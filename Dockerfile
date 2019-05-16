@@ -41,10 +41,10 @@ RUN echo '         ___    __                         _    ' >  /home/theia/.motd
     echo '     /_/  |_/_/|_|\__,_/_/ /_/ /_/\__,_/_/      ' >> /home/theia/.motd && \
     echo '================================================' >> /home/theia/.motd && \
     echo '=    Welcome to Launchpad Labs from Akamai     =' >> /home/theia/.motd && \
-    echo '================================================' >> /home/theia/.motd && \
+    echo '================================================' >> /home/theia/.motd
 RUN echo "cat /home/theia/.motd" >> /home/theia/.bashrc
 RUN echo "PS1='Akamai Developer [\w]$ '" >> /home/theia/.bashrc
-RUN pip install httpie-edgegrid
+RUN pip install --upgrade "urllib3==1.22" httpie-edgegrid
 RUN mkdir /home/theia/.httpie
 RUN echo '{' >> /home/theia/.httpie/config.json && \
     echo '"__meta__": {' >> /home/theia/.httpie/config.json && \
