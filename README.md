@@ -57,7 +57,7 @@ Navigate to localhost:3000 in an incognito window (NOT a regular window!).
 
 ### Overview 
 
-Understanding a few basic aspects of the (complex!) Theia extension architechture should get you started. 
+Understanding a few basic aspects of the (complex!) Theia extension architecture should get you started. 
 
 To create an extension object, export a class object which itself implements a Theia base classes (e.g., we do this [here][extension-base-class]) and then register your class (e.g., [here][extension-base-class-register]). 
 
@@ -69,23 +69,23 @@ The custom extension handles the following actions:
 
 ### Modify default file browser and terminal behavior
 
-The file browser opens when Theia loads. Modify this 
-behavior in the [`initializeLayout` method](./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L51-L54).
+The file browser opens when Theia loads; modify this 
+behavior in the [`initializeLayout` method][filebrowser-open].
 
-The terminal browser loads in the [`onStart` method](./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-34).
+The in-browser terminal loads in the [`onStart` method][terminal-open].
 
 ### Modify the Preview Pane
 
-Enable the Preview Pane or change its URL in the [`initializeLayout` method](./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L56-57)
+Enable the Preview Pane or change its URL in the [`initializeLayout` method][preview-pane].
 
 ### Modify menu items
 
-Remove menu items in the [`onStart` method](./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-44).
+Remove menu items in the [`onStart` method][menu-items].
 
 ## Misc TODO
 
 - [ ] Docs: Write a basic overview of the extension 
-- [ ] Docs: Write a basisc overview of Theia extension architechture
+- [ ] Docs: Write a basisc overview of Theia extension architecture
 - [ ] Expand the docs to highlight further possible customization of the Theia UI
 - [ ] Reserve the `/home/theia/` directory for Theia itself 
 
@@ -98,3 +98,7 @@ and maybe /home/akamai for saving example files.
 
 [extension-base-class]:./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L17
 [extension-base-class-register]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-frontend-module.ts#L17
+[filebrowser-open]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L51-L54
+[menu-items]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-44
+[terminal-open]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-34
+[preview-pane]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L56-57
