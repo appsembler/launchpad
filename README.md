@@ -57,7 +57,7 @@ Navigate to localhost:3000 in an incognito window (NOT a regular window!).
 
 ### Overview 
 
-All Theia customizations happen in `theia/akamai-extension/akamai-theia-extension/akamai-extension/src/`. 
+All Theia customizations happen in `theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/`. 
 
 - Theia calls the onStart function at runtime https://github.com/appsembler/launchpad/blob/bb1d7dd93f5db4182753e8b098274a83cb96a60b/theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L30
 
@@ -66,17 +66,17 @@ The custom extension handles the following actions:
 ### Modify default file browser and terminal behavior
 
 The file browser opens when Theia loads. Modify this 
-behavior in the [`initializeLayout` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/akamai-extension-contribution.ts#L51-L54).
+behavior in the [`initializeLayout` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L51-L54).
 
-The terminal browser loads in the [`onStart` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/akamai-extension-contribution.ts#L32-34).
+The terminal browser loads in the [`onStart` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-34).
 
 ### Modify the Preview Pane
 
-Enable the Preview Pane or change its URL in the [`initializeLayout` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/akamai-extension-contribution.ts#L56-57)
+Enable the Preview Pane or change its URL in the [`initializeLayout` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L56-57)
 
 ### Modify menu items
 
-Remove menu items in the [`onStart` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/akamai-extension-contribution.ts#L32-44).
+Remove menu items in the [`onStart` method](./theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-44).
 
 ## Misc TODO
 
