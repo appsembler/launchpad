@@ -42,9 +42,6 @@ export class AkamaiExtensionFrontendApplicationContribution implements FrontendA
         this.menus.unregisterMenuAction("workspace:openRecent", CommonMenus.FILE_OPEN);
         this.menus.unregisterMenuAction("workspace:close", CommonMenus.FILE_CLOSE);
         this.menus.unregisterMenuAction("workspace:saveAs", CommonMenus.FILE_OPEN);
-        
-        
-        console.log(this.menus);
     }
 
     initializeLayout(app: FrontendApplication): MaybePromise<void> {
