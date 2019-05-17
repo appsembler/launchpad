@@ -57,7 +57,11 @@ Navigate to localhost:3000 in an incognito window (NOT a regular window!).
 
 ### Overview 
 
-All Theia customizations happen in `theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/`. 
+Understanding a few basic aspects of the (complex!) Theia extension architechture should get you started. 
+
+To create an extension object, export a class object which itself implements a Theia base classes (e.g., we do this [here][extension-base-class]) and then register your class (e.g., [here][extension-base-class-register]). 
+
+All Theia customizations happen in [`theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/akamai-theia-extension-contribution.ts`](./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts).  
 
 - Theia calls the onStart function at runtime https://github.com/appsembler/launchpad/blob/bb1d7dd93f5db4182753e8b098274a83cb96a60b/theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L30
 
@@ -91,3 +95,6 @@ actual Theia app which is less than ideal because it shows up in the Theia file
 browser. If there's enough time, those two things should be separated into two
 different home folders. I suggest we use the theia one for saving the theia app
 and maybe /home/akamai for saving example files.
+
+[extension-base-class]:./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L17
+[extension-base-class-register]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-frontend-module.ts#L17
