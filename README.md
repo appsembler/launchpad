@@ -23,7 +23,7 @@ Table of Contents
 
 ## Build the Image
 
-To build the *Launchpad + Theia combo image*, go to the
+To build the Launchpad + Theia combo image, go to the
 root folder and run the following:
 
 ```
