@@ -2,7 +2,7 @@
 
 ## Release Candidate: \[0.1.0-rc.1\] 17 May 2019
 
-This is the initial commit of the Theia Dockerfile customized for Akamai.
+This is the initial commit of the customized Theia Dockerfile; it includes the Akamai Theia extension.
 
 ### Added 
 
