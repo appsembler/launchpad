@@ -11,10 +11,10 @@ Table of Contents
 * [Build the Image](#build-the-image)
 * [Local Development](#local-development)
 * [Customizations](#customizations)
-        * [Overview](#overview)
-        * [Modify default file browser and terminal behavior](#modify-default-file-browser-and-terminal-behavior)
-        * [Modify the Preview Pane](#modify-the-preview-pane)
-        * [Modify menu items](#modify-menu-items)
+    * [Overview](#overview)
+    * [Modify default file browser and terminal behavior](#modify-default-file-browser-and-terminal-behavior)
+    * [Modify the Preview Pane](#modify-the-preview-pane)
+    * [Modify menu items](#modify-menu-items)
 * [Misc TODO](#misc-todo)
 
 ## License
@@ -79,7 +79,7 @@ $ cd browser-app && yarn start
 
 Navigate to localhost:3000 in an incognito window (NOT a regular window!). 
 
-Make your changes and then build the Docker image per the instructions (far) above.
+Make your changes (see below for the right files) and then build the Docker image per the instructions (far) above.
 
 ## Customizations 
 
@@ -89,7 +89,7 @@ Understanding a few basic aspects of the (complex!) Theia extension architecture
 
 To create an extension object, export a class object which itself implements a Theia base classes (e.g., we do this [here][extension-base-class]) and then register your class (e.g., [here][extension-base-class-register]). 
 
-All Theia customizations happen in [`theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/akamai-theia-extension-contribution.ts`][extension-contribution]. 
+All Theia customizations happen in [`theia/akamai-extension/akamai-theia-extension/akamai-extension/src/browser/`][extension-src]; most happen in [`akamai-theia-extension-contribution.ts`][extension-contribution]. 
 
 See more at the (marginally helpful) [Theia extension docs][theia-extension-docs].
 
@@ -131,6 +131,7 @@ and maybe /home/akamai for saving example files.
 [extension-base-class]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L17
 [extension-base-class-register]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-frontend-module.ts#L17
 [extension-contribution]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts
+[extension-src]: ./theia/akamai-theia-extension/akamai-extension/src/browser/
 [filebrowser-open]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L51-L54
 [gce-auth]: https://help.appsembler.com/article/374-gcr
 [menu-items]: ./theia/akamai-theia-extension/akamai-extension/src/browser/akamai-extension-contribution.ts#L32-44
