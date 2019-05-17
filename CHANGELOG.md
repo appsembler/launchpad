@@ -1,4 +1,4 @@
-# Theia 
+# CHANGELOG
 
 ## \[0.1.0\] 17 May 2019
 
@@ -14,6 +14,5 @@ This is the initial commit of the Theia Dockerfile customized for Akamai.
 ### Tags 
 
 Git repo tag: `v0.1.0`
-Docker Image tag: `gcr.io/akamai-virtual-labs/akamai-theia:0.1.0`
-
-# Akamai
+Theia image tag: `gcr.io/akamai-virtual-labs/akamai-theia:0.1.0`
+Launchpad image tag: `gcr.io/akamai-virtual-labs/launchpad:0.1.0`
