@@ -21,48 +21,32 @@ Table of Contents
 
 [Apache License 2.0](LICENSE) 
 
-## Build the Image
+## Prerequisites 
 
-To build the Launchpad + Theia combo image, go to the
-root folder and run the following:
+- Node v10
 
-```
-$ docker build -t akamai/launchpad-theia .
-```
+## JavaScript Requirements
 
-The above command will build the Akamai (i.e., "launchpad-theia") image FROM the customized Theia image ("akamai-theia").
-
-*Note: This command assumes that you are authenticated with our private
-registry. If you are not, follow these [instructions][gce-auth].*
-
-To build the base Theia image:
+Install the requirements for our extension: 
 
 ```
-$ cd theia/ 
-$ docker build -t akamai/theia:latest
+$ cd ./theia/akamai-theia-extension && npm install lerna@2.4.0
+
 ```
 
-*It's best always to build from a tagged version of the base Theia image. You can of course build the Theia image from different Git commits within the repo and build the launchpad-theia image on top of that modified base image.*
-
-## Push the image to AVL 
-
-Tag your image with the prefix `gcr.io/akamai-virtual-labs/` and then push it. From there, follow [our help docs][avl-help-pull] on pulling the image into your AVL cluster.
+```
+$ cd ./theia && npm install
+```
 
 ## Local Development 
 
 Do your local development and build the Theia application on your 
 host. For the moment, development of this app in Docker is cumbersome.
 
-Navigate to the extension directory:
-
-```
-$ cd theia/akamai-theia-extension 
-```
-
 Watch the extension files: 
 
 ```
-$ cd akamai-extension && yarn watch 
+$ cd ./theia/akamai-theia-extension/akamai-extension/ && yarn watch
 ```
 
 Start a new shell, then watch the browser files:
@@ -80,6 +64,36 @@ $ cd browser-app && yarn start
 Navigate to localhost:3000 in an incognito window (NOT a regular window!). 
 
 Make your changes (see below for the right files) and then build the Docker image per the instructions (far) above.
+
+## Build the Image
+
+To build the Launchpad + Theia combo image, go to the
+root folder and run the following:
+
+```
+$ docker build -t akamai/launchpad-theia .
+```
+
+The above command will build the Akamai (i.e., "launchpad-theia") image FROM the customized Theia image ("akamai-theia").
+
+*Note: This command assumes that you are authenticated with our private
+registry. If you are not, follow these [instructions][gce-auth]. You also 
+must first compile several Theia files for this to work. See below in 
+"Local Development."*
+
+To build the base Theia image:
+
+```
+$ cd theia/ 
+$ docker build -t akamai/theia:latest
+```
+
+*It's best always to build from a tagged version of the base Theia image. You can of course build the Theia image from different Git commits within the repo and build the launchpad-theia image on top of that modified base image.*
+
+## Push the image to AVL 
+
+Tag your image with the prefix `gcr.io/akamai-virtual-labs/` and then push it. From there, follow [our help docs][avl-help-pull] on pulling the image into your AVL cluster.
+
 
 ## Customizations 
 
