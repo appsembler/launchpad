@@ -55,11 +55,11 @@ RUN echo '{' >> /home/theia/.httpie/config.json && \
     echo '"implicit_content_type": "json"' >> /home/theia/.httpie/config.json && \
     echo '}' >> /home/theia/.httpie/config.json
 
+RUN ln -s /cli /home/theia/cli
 VOLUME /root
 VOLUME /pipeline
 WORKDIR /home/theia
 ADD ./examples /home/theia
-
 EXPOSE 3000 9550
 
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/theia", "--hostname=0.0.0.0" ]
