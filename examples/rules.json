@@ -3,7 +3,7 @@
   "contractId": "ctr_C-1FRYVV3",
   "groupId": "grp_65092",
   "propertyId": "prp_535066",
-  "propertyName": "example.astronaut.training",
+  "propertyName": "example.web.astronaut.training",
   "propertyVersion": 1,
   "etag": "c870fb90cfd7f29c8a7a8f946aa3f9f57f7abf61",
   "rules": {
@@ -16,13 +16,13 @@
           "cacheKeyHostname": "ORIGIN_HOSTNAME",
           "compress": true,
           "enableTrueClientIp": false,
-          "forwardHostHeader": "REQUEST_HOST_HEADER",
+          "forwardHostHeader": "ORIGIN_HOSTNAME",
           "httpPort": 80,
           "httpsPort": 443,
           "originSni": true,
           "originType": "CUSTOMER",
           "verificationMode": "PLATFORM_SETTINGS",
-          "hostname": "origin-web.spacewalk.tours",
+          "hostname": "sol.origin-web.spacewalk.tours",
           "originCertificate": "",
           "ports": ""
         }
@@ -34,6 +34,14 @@
             "id": 849936
           }
         }
+      },
+      {
+         "name": "caching",
+         "options": {
+               "behavior": "MAX_AGE",
+               "mustRevalidate": false,
+               "ttl": "7d"
+               }
       },
       {
         "name": "allowPost",
