@@ -30,12 +30,8 @@ Table of Contents
 Install the requirements for our extension: 
 
 ```
-$ cd ./theia/akamai-theia-extension && npm install lerna@2.4.0
+$ cd ./theia/akamai-theia-extension && yarn
 
-```
-
-```
-$ cd ./theia && npm install
 ```
 
 ## Local Development 
