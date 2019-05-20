@@ -8,13 +8,17 @@ Table of Contents
 =================
 
 * [License](#license)
-* [Build the Image](#build-the-image)
+* [Prerequisites](#prerequisites)
+* [JavaScript Requirements](#javascript-requirements)
 * [Local Development](#local-development)
+* [Build the Image](#build-the-image)
+* [Push the image to AVL](#push-the-image-to-avl)
 * [Customizations](#customizations)
     * [Overview](#overview)
     * [Modify default file browser and terminal behavior](#modify-default-file-browser-and-terminal-behavior)
     * [Modify the Preview Pane](#modify-the-preview-pane)
-    * [Modify menu items](#modify-menu-items)
+    * [Remove menu items](#remove-menu-items)
+    * [Add menu items](#add-menu-items)
 * [Misc TODO](#misc-todo)
 
 ## License
