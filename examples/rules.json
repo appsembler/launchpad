@@ -3,7 +3,7 @@
   "contractId": "ctr_C-1FRYVV3",
   "groupId": "grp_65092",
   "propertyId": "prp_535066",
-  "propertyName": "example.astronaut.training",
+  "propertyName": "example.web.astronaut.training",
   "propertyVersion": 1,
   "etag": "c870fb90cfd7f29c8a7a8f946aa3f9f57f7abf61",
   "rules": {
@@ -22,7 +22,7 @@
           "originSni": true,
           "originType": "CUSTOMER",
           "verificationMode": "PLATFORM_SETTINGS",
-          "hostname": "origin-web.spacewalk.tours",
+          "hostname": "sol.origin-web.spacewalk.tours",
           "originCertificate": "",
           "ports": ""
         }
