@@ -61,12 +61,12 @@ export class AkamaiExtensionFrontendApplicationContribution implements FrontendA
         // and open the README.md file in that folder
         const workspace = this.workspaceService.workspace;
         if (workspace) {
-            const workspaceURI = new URI(workspace.uri);
+            // const workspaceURI = new URI(workspace.uri);
 
-            const readmeURI = workspaceURI.resolve('README.md');
-            open(this.openerService, readmeURI).then(
-                () => this.preview.open(readmeURI)
-            );
+            // const readmeURI = workspaceURI.resolve('README.md');
+            // open(this.openerService, readmeURI).then(
+            //     () => this.preview.open(readmeURI)
+            // );
   
         }
     }
