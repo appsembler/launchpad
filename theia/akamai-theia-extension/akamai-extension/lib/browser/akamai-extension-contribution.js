@@ -46,38 +46,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var inversify_1 = require("inversify");
 var common_1 = require("@theia/core/lib/common");
 var uri_1 = require("@theia/core/lib/common/uri");
+var browser_1 = require("@theia/core/lib/browser");
 var navigator_contribution_1 = require("@theia/navigator/lib/browser/navigator-contribution");
 var terminal_service_1 = require("@theia/terminal/lib/browser/base/terminal-service");
-var browser_1 = require("@theia/core/lib/browser");
-var browser_2 = require("@theia/workspace/lib/browser");
+var browser_2 = require("@theia/core/lib/browser");
+var browser_3 = require("@theia/workspace/lib/browser");
 var preview_contribution_1 = require("@theia/preview/lib/browser/preview-contribution");
-// import { MiniBrowserCommands } from '@theia/mini-browser/lib/browser/mini-browser-open-handler';
+var mini_browser_open_handler_1 = require("@theia/mini-browser/lib/browser/mini-browser-open-handler");
 var akamai_extension_preferences_1 = require("./akamai-extension-preferences");
 var common_frontend_contribution_1 = require("@theia/core/lib/browser/common-frontend-contribution");
+var frontend_application_state_1 = require("@theia/core/lib/browser/frontend-application-state");
 // import { EditorMainMenu } from '@theia/editor/lib/browser/editor-menu';
 var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () {
     function AkamaiExtensionFrontendApplicationContribution(logger, navigator, terminal, openerService, workspaceService, preview, commands, menus) {
@@ -93,13 +75,13 @@ var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () 
     AkamaiExtensionFrontendApplicationContribution.prototype.onStart = function (app) {
         return __awaiter(this, void 0, void 0, function () {
             var terminalWidget;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.terminal.newTerminal({})];
                     case 1:
                         terminalWidget = _a.sent();
-                        terminalWidget.start();
-                        this.terminal.activateTerminal(terminalWidget);
+                        terminalWidget.start().then(function (a) { return _this.terminal.open(terminalWidget); });
                         this.menus.unregisterMenuAction("git-history:open-branch-history", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
                         this.menus.unregisterMenuAction("problemsView:toggle", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
                         this.menus.unregisterMenuAction("callhierachy:toggle", common_frontend_contribution_1.CommonMenus.VIEW_VIEWS);
@@ -110,42 +92,65 @@ var AkamaiExtensionFrontendApplicationContribution = /** @class */ (function () 
                         this.menus.unregisterMenuAction("workspace:openRecent", common_frontend_contribution_1.CommonMenus.FILE_OPEN);
                         this.menus.unregisterMenuAction("workspace:close", common_frontend_contribution_1.CommonMenus.FILE_CLOSE);
                         this.menus.unregisterMenuAction("workspace:saveAs", common_frontend_contribution_1.CommonMenus.FILE_OPEN);
-                        console.log(this.menus);
+                        this.menus.unregisterMenuAction(browser_1.CommonCommands.ABOUT_COMMAND);
+                        if (!this.workspaceService.opened) {
+                            this.stateService.reachedState('ready').then(function (a) {
+                                // opens a website in preview
+                                var url = _this.getQueryparam("page");
+                                if (url !== "" && url !== null) {
+                                    _this.commands.executeCommand(mini_browser_open_handler_1.MiniBrowserCommands.OPEN_URL.id, url);
+                                }
+                            });
+                        }
                         return [2 /*return*/];
                 }
             });
         });
     };
     AkamaiExtensionFrontendApplicationContribution.prototype.initializeLayout = function (app) {
-        var _this = this;
         this.menus.unregisterMenuAction("5_go", common_1.MAIN_MENU_BAR);
         this.menus.unregisterMenuAction("9_help", common_1.MAIN_MENU_BAR);
         // We open a new file view in the navigator
         this.navigator.openView({
             activate: true
         });
-        // opens a website in preview
-        // this.commands.executeCommand(MiniBrowserCommands.OPEN_URL.id, "https://www.bostonglobe.com/")
         // We get the path of the currently open folder in the workspace (passed when starting the IDE)
         // and open the README.md file in that folder
         var workspace = this.workspaceService.workspace;
         if (workspace) {
-            var workspaceURI = new uri_1.default(workspace.uri);
-            var readmeURI_1 = workspaceURI.resolve('README.md');
-            browser_1.open(this.openerService, readmeURI_1).then(function () { return _this.preview.open(readmeURI_1); });
+            // const workspaceURI = new URI(workspace.uri);
+            // const readmeURI = workspaceURI.resolve('README.md');
+            // open(this.openerService, readmeURI).then(
+            //     () => this.preview.open(readmeURI)
+            // );
         }
     };
+    AkamaiExtensionFrontendApplicationContribution.prototype.getQueryparam = function (name, url) {
+        if (!url)
+            url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url);
+        if (!results)
+            return null;
+        if (!results[2])
+            return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    };
+    __decorate([
+        inversify_1.inject(frontend_application_state_1.FrontendApplicationStateService),
+        __metadata("design:type", frontend_application_state_1.FrontendApplicationStateService)
+    ], AkamaiExtensionFrontendApplicationContribution.prototype, "stateService", void 0);
     AkamaiExtensionFrontendApplicationContribution = __decorate([
         inversify_1.injectable(),
         __param(0, inversify_1.inject(common_1.ILogger)),
         __param(1, inversify_1.inject(navigator_contribution_1.FileNavigatorContribution)),
         __param(2, inversify_1.inject(terminal_service_1.TerminalService)),
-        __param(3, inversify_1.inject(browser_1.OpenerService)),
-        __param(4, inversify_1.inject(browser_2.WorkspaceService)),
+        __param(3, inversify_1.inject(browser_2.OpenerService)),
+        __param(4, inversify_1.inject(browser_3.WorkspaceService)),
         __param(5, inversify_1.inject(preview_contribution_1.PreviewContribution)),
         __param(6, inversify_1.inject(common_1.CommandRegistry)),
         __param(7, inversify_1.inject(common_1.MenuModelRegistry)),
-        __metadata("design:paramtypes", [Object, navigator_contribution_1.FileNavigatorContribution, Object, Object, browser_2.WorkspaceService,
+        __metadata("design:paramtypes", [Object, navigator_contribution_1.FileNavigatorContribution, Object, Object, browser_3.WorkspaceService,
             preview_contribution_1.PreviewContribution,
             common_1.CommandRegistry,
             common_1.MenuModelRegistry])
@@ -157,26 +162,20 @@ exports.AkamaiHomepage = {
     id: 'Akamai.AkamaiHomepage',
     label: "Akamai Homepage"
 };
-var AkamaiMenus;
-(function (AkamaiMenus) {
-    AkamaiMenus.AKAMAI = __spread(common_1.MAIN_MENU_BAR, ['8_akamai']);
-    AkamaiMenus.AKAMAI_SECTION1 = __spread(AkamaiMenus.AKAMAI, ['1_section']);
-})(AkamaiMenus = exports.AkamaiMenus || (exports.AkamaiMenus = {}));
 var AkamaiExtensionMenuContribution = /** @class */ (function () {
     function AkamaiExtensionMenuContribution(openerService) {
         this.openerService = openerService;
     }
     AkamaiExtensionMenuContribution.prototype.registerMenus = function (menus) {
-        menus.registerSubmenu(AkamaiMenus.AKAMAI, "Akamai");
-        menus.registerMenuAction(AkamaiMenus.AKAMAI_SECTION1, {
+        menus.registerMenuAction(common_frontend_contribution_1.CommonMenus.HELP, {
             commandId: exports.AkamaiHomepage.id,
             order: '0',
-            label: 'Homepage'
+            label: 'Contact Us'
         });
     };
     AkamaiExtensionMenuContribution = __decorate([
         inversify_1.injectable(),
-        __param(0, inversify_1.inject(browser_1.OpenerService)),
+        __param(0, inversify_1.inject(browser_2.OpenerService)),
         __metadata("design:paramtypes", [Object])
     ], AkamaiExtensionMenuContribution);
     return AkamaiExtensionMenuContribution;
@@ -190,12 +189,12 @@ var AkamaiExtensionCommandContribution = /** @class */ (function () {
     AkamaiExtensionCommandContribution.prototype.registerCommands = function (registry) {
         var _this = this;
         registry.registerCommand(exports.AkamaiHomepage, {
-            execute: function () { return browser_1.open(_this.openerService, new uri_1.default(_this.preferences['akamai.url.homepage'])); }
+            execute: function () { return browser_2.open(_this.openerService, new uri_1.default(_this.preferences['akamai.url.homepage'])); }
         });
     };
     AkamaiExtensionCommandContribution = __decorate([
         inversify_1.injectable(),
-        __param(0, inversify_1.inject(browser_1.OpenerService)),
+        __param(0, inversify_1.inject(browser_2.OpenerService)),
         __param(1, inversify_1.inject(akamai_extension_preferences_1.AkamaiPreferences)),
         __metadata("design:paramtypes", [Object, Object])
     ], AkamaiExtensionCommandContribution);

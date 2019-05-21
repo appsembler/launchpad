@@ -6,6 +6,7 @@ import { OpenerService } from '@theia/core/lib/browser';
 import { WorkspaceService } from '@theia/workspace/lib/browser';
 import { PreviewContribution } from '@theia/preview/lib/browser/preview-contribution';
 import { AkamaiPreferences } from './akamai-extension-preferences';
+import { FrontendApplicationStateService } from "@theia/core/lib/browser/frontend-application-state";
 export declare class AkamaiExtensionFrontendApplicationContribution implements FrontendApplicationContribution {
     protected readonly logger: ILogger;
     protected readonly navigator: FileNavigatorContribution;
@@ -15,18 +16,16 @@ export declare class AkamaiExtensionFrontendApplicationContribution implements F
     protected readonly preview: PreviewContribution;
     protected readonly commands: CommandRegistry;
     protected readonly menus: MenuModelRegistry;
+    protected readonly stateService: FrontendApplicationStateService;
     constructor(logger: ILogger, navigator: FileNavigatorContribution, terminal: TerminalService, openerService: OpenerService, workspaceService: WorkspaceService, preview: PreviewContribution, commands: CommandRegistry, menus: MenuModelRegistry);
     onStart(app: FrontendApplication): Promise<void>;
     initializeLayout(app: FrontendApplication): MaybePromise<void>;
+    protected getQueryparam(name: string, url?: string): string | null;
 }
 export declare const AkamaiHomepage: {
     id: string;
     label: string;
 };
-export declare namespace AkamaiMenus {
-    const AKAMAI: string[];
-    const AKAMAI_SECTION1: string[];
-}
 export declare class AkamaiExtensionMenuContribution implements MenuContribution {
     protected readonly openerService: OpenerService;
     constructor(openerService: OpenerService);
