@@ -7,7 +7,7 @@ export const AkamaiConfigSchema: PreferenceSchema = {
         'akamai.url.homepage': {
             'type': 'string',
             'description': 'Akamai Homepage',
-            'default': 'https://www.akamai.com'
+            'default': 'https://developer.akamai.com'
         }
     }
 };
