@@ -42,6 +42,7 @@ export class AkamaiExtensionFrontendApplicationContribution implements FrontendA
         this.menus.unregisterMenuAction("workspace:openRecent", CommonMenus.FILE_OPEN);
         this.menus.unregisterMenuAction("workspace:close", CommonMenus.FILE_CLOSE);
         this.menus.unregisterMenuAction("workspace:saveAs", CommonMenus.FILE_OPEN);
+        this.menus.unregisterMenuAction(CommonCommands.ABOUT_COMMAND);
     }
 
     initializeLayout(app: FrontendApplication): MaybePromise<void> {
@@ -76,11 +77,6 @@ export const AkamaiHomepage = {
     label: "Akamai Homepage"
 };
 
-export namespace AkamaiMenus {
-    export const AKAMAI = [...MAIN_MENU_BAR, '8_akamai'];
-    export const AKAMAI_SECTION1 = [...AKAMAI, '1_section'];
-}
-
 @injectable()
 export class AkamaiExtensionMenuContribution implements MenuContribution {
     constructor(
@@ -88,11 +84,10 @@ export class AkamaiExtensionMenuContribution implements MenuContribution {
     ) { }
 
     registerMenus(menus: MenuModelRegistry): void {
-        menus.registerSubmenu(AkamaiMenus.AKAMAI, "Akamai");
-        menus.registerMenuAction(AkamaiMenus.AKAMAI_SECTION1, {
+        menus.registerMenuAction(CommonMenus.HELP, {
                 commandId: AkamaiHomepage.id,
                 order: '0',
-                label: 'Homepage'
+                label: 'Contact Us'
             });
     }
 }
