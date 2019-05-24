@@ -60,7 +60,8 @@ VOLUME /pipeline
 WORKDIR /home/theia
 ADD ./examples /home/theia
 COPY theia/README.md /home/theia
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 EXPOSE 3000 9550
 
-ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/theia", "--hostname=0.0.0.0" ]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

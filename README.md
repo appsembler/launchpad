@@ -75,7 +75,7 @@ root folder and run the following:
 $ docker build -t akamai/launchpad-theia .
 ```
 
-The above command will build the Akamai (i.e., "launchpad-theia") image FROM the customized Theia image ("akamai-theia").
+The above command will build the Akamai (i.e., "launchpad-theia") image `FROM` the customized Theia image ("akamai-theia").
 
 *Note: This command assumes that you are authenticated with our private
 registry. If you are not, follow these [instructions][gce-auth]. You also 
