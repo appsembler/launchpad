@@ -28,6 +28,7 @@ Table of Contents
 ## Prerequisites 
 
 - Node v10
+- yarn (`npm install yarn -g`)
 
 ## JavaScript Requirements
 
@@ -46,19 +47,19 @@ host. For the moment, development of this app in Docker is cumbersome.
 Watch the extension files: 
 
 ```
-$ cd ./theia/akamai-theia-extension/akamai-extension/ && yarn watch
+$ cd ./launchpad/theia/akamai-theia-extension/akamai-extension/ && yarn watch
 ```
 
 Start a new shell, then watch the browser files:
 
 ```
-$ cd browser-app && yarn watch 
+$ cd ./launchpad/theia/akamai-theia-extension/browser-app/ && yarn watch 
 ```
 
 Start another shell, then run the Theia app: 
 
 ```
-$ cd browser-app && yarn start 
+$ cd ./launchpad/theia/akamai-theia-extension/browser-app && yarn start .
 ```
 
 Navigate to localhost:3000 in an incognito window (NOT a regular window!). 
