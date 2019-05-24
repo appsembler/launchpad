@@ -1,6 +1,5 @@
 # Dockerfile.theia 
-# Alpine 3.8 has node 8 by default, v10 doesn't work with Theia
-FROM gcr.io/akamai-virtual-labs/akamai-theia:0.1.0-rc.1
+FROM gcr.io/akamai-virtual-labs/akamai-theia:0.1.0
 ENV AKAMAI_CLI_HOME=/cli GOROOT=/usr/lib/go GOPATH=/go
 ENV PATH=/go/bin:$PATH
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm
